@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suppliers</title>
+</head>
+<body>
+<h1>Supplierlar ro‘yxati</h1>
+<ul>
+    {% for s in suppliers %}
+        <li><a href="{% url 'products' %}?supplier={{ s.id }}">{{ s.name }}</a></li>
+    {% empty %}
+        <li>Supplier topilmadi.</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

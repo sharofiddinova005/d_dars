@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        .filter { margin-bottom: 20px; }
+        select, button { padding: 5px 10px; margin-right: 10px; }
+        .product { border-bottom: 1px solid #ccc; padding: 10px 0; }
+        .empty { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>{{ name }}</h1>
+
+<!-- FILTER -->
+<div class="filter">
+    <form method="GET">
+        <label>Category:</label>
+        <select name="category">
+            <option value="">Barcha kategoriyalar</option>
+            {% for c in categories %}
+                <option value="{{ c.id }}" {% if selected_category == c.id|stringformat:"s" %}selected{% endif %}>{{ c.title }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Supplier:</label>
+        <select name="supplier">
+            <option value="">Barcha supplierlar</option>
+            {% for s in suppliers %}
+                <option value="{{ s.id }}" {% if selected_supplier == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<!-- PRODUCT LIST -->
+<div class="products">
+    {% if products %}
+        {% for p in products %}
+            <div class="product">
+                <h2>{{ p.title }}</h2>
+                <p>Category: {{ p.category.title }}</p>
+                <p>Supplier: {{ p.supplier.name if p.supplier else "N/A" }}</p>
+                <p>Price: {{ p.price }}</p>
+                <p>Quantity: {{ p.quantity }}</p>
+                <p>Created: {{ p.created_ed|date:"d-m-Y H:i" }}</p>
+                {% if p.photo %}
+                    <img src="{{ p.photo.url }}" alt="{{ p.title }}" style="max-width:100px;">
+                {% endif %}
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty">Hech qanday product topilmadi.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

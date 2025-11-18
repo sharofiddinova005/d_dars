@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+</head>
+<body>
+<h1>Categorylar ro‘yxati</h1>
+<ul>
+    {% for c in categories %}
+        <li><a href="{% url 'products' %}?category={{ c.id }}">{{ c.title }}</a></li>
+    {% empty %}
+        <li>Category topilmadi.</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
