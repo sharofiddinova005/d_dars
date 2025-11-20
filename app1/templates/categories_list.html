@@ -5,13 +5,13 @@
     <title>Categories</title>
 </head>
 <body>
-<h1>Categorylar ro‘yxati</h1>
+<h2>Kategoriyalar</h2>
+
+<a href="{% url 'add_category' %}">+ Kategoriya qo‘shish</a>
+
 <ul>
     {% for c in categories %}
-        <li><a href="{% url 'products' %}?category={{ c.id }}">{{ c.title }}</a></li>
-    {% empty %}
-        <li>Category topilmadi.</li>
+        <li>{{ c.name }}</li>
     {% endfor %}
 </ul>
-</body>
-</html>
+

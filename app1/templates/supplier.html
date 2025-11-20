@@ -5,13 +5,12 @@
     <title>Suppliers</title>
 </head>
 <body>
-<h1>Supplierlar ro‘yxati</h1>
+<h2>Suppliers</h2>
+
+<a href="{% url 'add_supplier' %}">+ Supplier qo‘shish</a>
+
 <ul>
     {% for s in suppliers %}
-        <li><a href="{% url 'products' %}?supplier={{ s.id }}">{{ s.name }}</a></li>
-    {% empty %}
-        <li>Supplier topilmadi.</li>
+        <li>{{ s.name }} — {{ s.phone }}</li>
     {% endfor %}
 </ul>
-</body>
-</html>

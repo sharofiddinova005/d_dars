@@ -23,7 +23,10 @@
         <select name="category">
             <option value="">Barcha kategoriyalar</option>
             {% for c in categories %}
-                <option value="{{ c.id }}" {% if selected_category == c.id|stringformat:"s" %}selected{% endif %}>{{ c.title }}</option>
+                <option value="{{ c.id }}"
+                    {% if selected_category == c.id|stringformat:"s" %}selected{% endif %}>
+                    {{ c.name }}
+                </option>
             {% endfor %}
         </select>
 
@@ -31,7 +34,10 @@
         <select name="supplier">
             <option value="">Barcha supplierlar</option>
             {% for s in suppliers %}
-                <option value="{{ s.id }}" {% if selected_supplier == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+                <option value="{{ s.id }}"
+                    {% if selected_supplier == s.id|stringformat:"s" %}selected{% endif %}>
+                    {{ s.name }}
+                </option>
             {% endfor %}
         </select>
 
@@ -44,14 +50,21 @@
     {% if products %}
         {% for p in products %}
             <div class="product">
-                <h2>{{ p.title }}</h2>
-                <p>Category: {{ p.category.title }}</p>
+                <h2>{{ p.name }}</h2>
+                <p>Category: {{ p.category.name }}</p>
                 <p>Supplier: {{ p.supplier.name if p.supplier else "N/A" }}</p>
                 <p>Price: {{ p.price }}</p>
-                <p>Quantity: {{ p.quantity }}</p>
-                <p>Created: {{ p.created_ed|date:"d-m-Y H:i" }}</p>
+
+                {% if p.quantity %}
+                    <p>Quantity: {{ p.quantity }}</p>
+                {% endif %}
+
+                {% if p.created_ed %}
+                    <p>Created: {{ p.created_ed|date:"d-m-Y H:i" }}</p>
+                {% endif %}
+
                 {% if p.photo %}
-                    <img src="{{ p.photo.url }}" alt="{{ p.title }}" style="max-width:100px;">
+                    <img src="{{ p.photo.url }}" alt="{{ p.name }}" style="max-width:100px;">
                 {% endif %}
                 <hr>
             </div>
